@@ -1,16 +1,16 @@
-import invariant from 'tiny-invariant';
-import { ChainId } from '../constants';
-import { validateAndParseAddress } from '../utils';
-import { Currency } from './currency';
+import invariant from 'tiny-invariant'
+import { ChainId } from '../constants'
+import { validateAndParseAddress } from '../utils'
+import { Currency } from './currency'
 
 /**
  * Represents an ERC20 token with a unique address and some metadata.
  */
 export class Token extends Currency {
-  public readonly chainId: ChainId;
-  public readonly address: string;
+  public readonly chainId: ChainId
+  public readonly address: string
 
-  public static readonly WETH: { [key: number]: Token; } = {
+  public static readonly WETH: { [key: number]: Token } = {
     [ChainId.MAINNET]: new Token(
       ChainId.MAINNET,
       '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
@@ -53,25 +53,37 @@ export class Token extends Currency {
       'WETH',
       'Wrapped Ether on Matic'
     )
-  };
+  }
 
-  public static readonly WSPENT: { [key: number]: Token; } = {
-    [ChainId.ESPENTO]: new Token(ChainId.ESPENTO, '0x32c854b1cb64E135E14a140016674Aec4c38f41d', 18, 'WSPENT', 'Wrapped WSPENT')
-  };
+  public static readonly WSPENT: { [key: number]: Token } = {
+    [ChainId.ESPENTO]: new Token(
+      ChainId.ESPENTO,
+      '0xB2629C6769ea4C2bEaae6107556899e9653899d9',
+      18,
+      'WSPENT',
+      'Wrapped WSPENT'
+    )
+  }
 
-  public static readonly WSPOA: { [key: number]: Token; } = {
+  public static readonly WSPOA: { [key: number]: Token } = {
     [ChainId.SOKOL]: new Token(ChainId.SOKOL, '0xc655c6D80ac92d75fBF4F40e95280aEb855B1E87', 18, 'WSPOA', 'Wrapped SPOA')
-  };
+  }
 
-  public static readonly WXDAI: { [key: number]: Token; } = {
+  public static readonly WXDAI: { [key: number]: Token } = {
     [ChainId.XDAI]: new Token(ChainId.XDAI, '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d', 18, 'WXDAI', 'Wrapped xDAI')
-  };
+  }
 
-  public static readonly WMATIC: { [key: number]: Token; } = {
-    [ChainId.MATIC]: new Token(ChainId.MATIC, '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', 18, 'WMATIC', 'Wrapped Matic')
-  };
+  public static readonly WMATIC: { [key: number]: Token } = {
+    [ChainId.MATIC]: new Token(
+      ChainId.MATIC,
+      '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
+      18,
+      'WMATIC',
+      'Wrapped Matic'
+    )
+  }
 
-  public static readonly DXD: { [key: number]: Token; } = {
+  public static readonly DXD: { [key: number]: Token } = {
     [ChainId.MAINNET]: new Token(ChainId.MAINNET, '0xa1d65E8fB6e87b60FECCBc582F7f97804B725521', 18, 'DXD', 'DXdao'),
     [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, '0x554898A0BF98aB0C03ff86C7DccBE29269cc4d29', 18, 'DXD', 'DXdao'),
     [ChainId.XDAI]: new Token(
@@ -81,7 +93,7 @@ export class Token extends Currency {
       'DXD',
       'DXdao from Ethereum'
     )
-  };
+  }
 
   private static readonly NATIVE_CURRENCY_WRAPPER: { [chainId in ChainId]: Token } = {
     [ChainId.MAINNET]: Token.WETH[ChainId.MAINNET],
@@ -91,12 +103,12 @@ export class Token extends Currency {
     [ChainId.XDAI]: Token.WXDAI[ChainId.XDAI],
     [ChainId.MATIC]: Token.WMATIC[ChainId.MATIC],
     [ChainId.ESPENTO]: Token.WSPENT[ChainId.ESPENTO]
-  };
+  }
 
   public constructor(chainId: ChainId, address: string, decimals: number, symbol?: string, name?: string) {
-    super(decimals, symbol, name);
-    this.chainId = chainId;
-    this.address = validateAndParseAddress(address);
+    super(decimals, symbol, name)
+    this.chainId = chainId
+    this.address = validateAndParseAddress(address)
   }
 
   /**
@@ -106,9 +118,9 @@ export class Token extends Currency {
   public equals(other: Token): boolean {
     // short circuit on reference equality
     if (this === other) {
-      return true;
+      return true
     }
-    return this.chainId === other.chainId && this.address === other.address;
+    return this.chainId === other.chainId && this.address === other.address
   }
 
   /**
@@ -118,17 +130,17 @@ export class Token extends Currency {
    * @throws if the tokens are on different chains
    */
   public sortsBefore(other: Token): boolean {
-    invariant(this.chainId === other.chainId, 'CHAIN_IDS');
-    invariant(this.address !== other.address, 'ADDRESSES');
-    return this.address.toLowerCase() < other.address.toLowerCase();
+    invariant(this.chainId === other.chainId, 'CHAIN_IDS')
+    invariant(this.address !== other.address, 'ADDRESSES')
+    return this.address.toLowerCase() < other.address.toLowerCase()
   }
 
   public static getNativeWrapper(chainId: ChainId): Token {
-    return Token.NATIVE_CURRENCY_WRAPPER[chainId];
+    return Token.NATIVE_CURRENCY_WRAPPER[chainId]
   }
 
   public static isNativeWrapper(token: Token): boolean {
-    return Token.NATIVE_CURRENCY_WRAPPER[token.chainId].equals(token);
+    return Token.NATIVE_CURRENCY_WRAPPER[token.chainId].equals(token)
   }
 }
 
@@ -137,21 +149,20 @@ export class Token extends Currency {
  */
 export function currencyEquals(currencyA: Currency, currencyB: Currency): boolean {
   if (currencyA instanceof Token && currencyB instanceof Token) {
-    return currencyA.equals(currencyB);
+    return currencyA.equals(currencyB)
   } else if (currencyA instanceof Token) {
-    return false;
+    return false
   } else if (currencyB instanceof Token) {
-    return false;
+    return false
   } else {
-    return currencyA === currencyB;
+    return currencyA === currencyB
   }
 }
 
 // reexport for convenience
-export const WETH = Token.WETH;
-export const WSPOA = Token.WSPOA;
-export const DXD = Token.DXD;
-export const WXDAI = Token.WXDAI;
-export const WMATIC = Token.WMATIC;
-export const WSPENT = Token.WSPENT;
-
+export const WETH = Token.WETH
+export const WSPOA = Token.WSPOA
+export const DXD = Token.DXD
+export const WXDAI = Token.WXDAI
+export const WMATIC = Token.WMATIC
+export const WSPENT = Token.WSPENT
