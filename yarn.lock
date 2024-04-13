@@ -2619,24 +2619,17 @@ domexception@^1.0.1:
   dependencies:
     webidl-conversions "^4.0.2"
 
-"dxswap-core@https://github.com/princepatel1010/dxswap-core":
+"dxswap-core@https://github.com/theblockbuddy/dxswap-core":
   version "0.3.6"
-  uid "7d13e912a7923e98594ef3579dfa869215b5e00a"
-  resolved "https://github.com/princepatel1010/dxswap-core#7d13e912a7923e98594ef3579dfa869215b5e00a"
+  resolved "https://github.com/theblockbuddy/dxswap-core#24c3f30ced4269401173e03207e83b7a9db8028a"
   dependencies:
     typescript "^3.9.5"
 
-"dxswap-core@https://github.com/princepatel1010/dxswap-core.git#master":
-  version "0.3.6"
-  resolved "https://github.com/princepatel1010/dxswap-core.git#7d13e912a7923e98594ef3579dfa869215b5e00a"
-  dependencies:
-    typescript "^3.9.5"
-
-"dxswap-periphery@https://github.com/princepatel1010/dxswap-periphery.git#master":
+"dxswap-periphery@https://github.com/theblockbuddy/dxswap-periphery":
   version "0.3.7"
-  resolved "https://github.com/princepatel1010/dxswap-periphery.git#326ffb7e38b548f3d62d9621c0de1ef4ee0f995d"
+  resolved "https://github.com/theblockbuddy/dxswap-periphery#70901493a895894c60fc7c97cba30c09fbacff5e"
   dependencies:
-    dxswap-core "https://github.com/princepatel1010/dxswap-core"
+    dxswap-core "https://github.com/theblockbuddy/dxswap-core"
 
 ecc-jsbn@~0.1.1:
   version "0.1.2"
@@ -5779,7 +5772,7 @@ safe-regex@^1.1.0:
   dependencies:
     ret "~0.1.10"
 
-"safer-buffer@>= 2.1.2 < 3", safer-buffer@^2.0.2, safer-buffer@^2.1.0:
+"safer-buffer@>= 2.1.2 < 3", safer-buffer@^2.0.2, safer-buffer@^2.1.0, safer-buffer@~2.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
